@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown Web Slides</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.0.2/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body class="bg-gray-100">
+    <div id="app" class="container mx-auto p-4">
+        <div class="mb-4 space-x-2">
+            <input type="file" id="logo-input" accept="image/*" class="hidden">
+            <button id="logo-btn" class="px-4 py-2 bg-blue-500 text-white rounded">Upload Logo</button>
+            <input type="file" id="bg-input" accept="image/*" class="hidden">
+            <button id="bg-btn" class="px-4 py-2 bg-green-500 text-white rounded">Upload Background</button>
+        </div>
+        <div class="flex space-x-4">
+            <div id="editor" class="w-1/2">
+                <textarea id="markdown-input" class="w-full h-96 p-2 border rounded" placeholder="Enter your markdown here. Use '---' to separate slides."></textarea>
+            </div>
+            <div id="preview" class="w-1/2 h-96 p-2 border rounded overflow-auto"></div>
+        </div>
+        <div class="mt-4 space-x-2">
+            <button id="save-btn" class="px-4 py-2 bg-blue-500 text-white rounded">Save Presentation</button>
+            <button id="pdf-btn" class="px-4 py-2 bg-green-500 text-white rounded">Download PDF</button>
+            <button id="present-btn" class="px-4 py-2 bg-purple-500 text-white rounded">Start Presentation</button>
+        </div>
+        <div id="saved-presentations" class="mt-4">
+            <h2 class="text-xl font-bold">Saved Presentations</h2>
+            <ul id="presentation-list"></ul>
+        </div>
+    </div>
+    <div id="presentation" class="fixed inset-0 bg-black hidden">
+        <img id="logo" class="absolute top-4 left-4 h-12" style="display: none;">
+        <div id="slide-content" class="text-white p-8 h-full flex items-center justify-center"></div>
+        <button id="prev-slide" class="absolute left-4 top-1/2 transform -translate-y-1/2 text-white">&#10094;</button>
+        <button id="next-slide" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-white">&#10095;</button>
+        <button id="exit-present" class="absolute top-4 right-4 px-4 py-2 bg-gray-800 rounded text-white">Exit</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
