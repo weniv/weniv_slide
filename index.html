@@ -5,9 +5,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Markdown Web Slides</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'custom': ['var(--font-custom)', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
+    <style id="custom-font-style"></style>
+    <style>
+        body, #preview, #slide-content {
+            font-family: var(--font-custom, sans-serif);
+        }
+        /* 기본 Typography 스타일 */
+        .markdown-body h1 {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 0.5em;
+        }
+        .markdown-body h2 {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 0.5em;
+        }
+        .markdown-body h3 {
+            font-size: 1.25em;
+            font-weight: bold;
+            margin-bottom: 0.5em;
+        }
+        .markdown-body p {
+            margin-bottom: 1em;
+            line-height: 1.5;
+        }
+        .markdown-body ul, .markdown-body ol {
+            margin-bottom: 1em;
+            padding-left: 2em;
+        }
+        .markdown-body li {
+            margin-bottom: 0.5em;
+        }
+        .markdown-body a {
+            color: #3182ce;
+            text-decoration: underline;
+        }
+        .markdown-body code {
+            background-color: #f0f0f0;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        .markdown-body pre {
+            background-color: #f0f0f0;
+            padding: 1em;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.0.2/marked.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style id="custom-font-style"></style>
 </head>
 <body class="bg-gray-100">
     <div id="app" class="container mx-auto p-4">
@@ -16,12 +77,24 @@
             <button id="logo-btn" class="px-4 py-2 bg-blue-500 text-white rounded">Upload Logo</button>
             <input type="file" id="bg-input" accept="image/*" class="hidden">
             <button id="bg-btn" class="px-4 py-2 bg-green-500 text-white rounded">Upload Background</button>
+            <select id="font-select" class="px-4 py-2 bg-yellow-500 text-white rounded">
+                <option value="">Select Font</option>
+                <option value="BMDOHYEON">BMDOHYEON</option>
+                <option value="BMEuljiro10yearslater">BMEuljiro10yearslater</option>
+                <option value="BMEULJIROTTF">BMEULJIROTTF</option>
+                <option value="BMHANNA_11yrs">BMHANNA_11yrs</option>
+                <option value="BMHANNAAir">BMHANNAAir</option>
+                <option value="BMHANNAPro">BMHANNAPro</option>
+                <option value="BMJUA">BMJUA</option>
+                <option value="BMKIRANGHAERANG">BMKIRANGHAERANG</option>
+                <option value="BMYEONSUNG">BMYEONSUNG</option>
+            </select>
         </div>
         <div class="flex space-x-4">
             <div id="editor" class="w-1/2">
                 <textarea id="markdown-input" class="w-full h-96 p-2 border rounded" placeholder="Enter your markdown here. Use '---' to separate slides."></textarea>
             </div>
-            <div id="preview" class="w-1/2 h-96 p-2 border rounded overflow-auto"></div>
+            <div id="preview" class="w-1/2 h-96 p-2 border rounded overflow-auto font-custom"></div>
         </div>
         <div class="mt-4 space-x-2">
             <button id="save-btn" class="px-4 py-2 bg-blue-500 text-white rounded">Save Presentation</button>
@@ -33,9 +106,9 @@
             <ul id="presentation-list"></ul>
         </div>
     </div>
-    <div id="presentation" class="fixed inset-0 bg-black hidden">
+    <div id="presentation" class="fixed inset-0 bg-black hidden font-custom">
         <img id="logo" class="absolute top-4 left-4 h-12" style="display: none;">
-        <div id="slide-content" class="text-white p-8 h-full flex items-center justify-center"></div>
+        <div id="slide-content" class="text-white p-8 h-full flex items-center justify-center font-custom"></div>
         <button id="prev-slide" class="absolute left-4 top-1/2 transform -translate-y-1/2 text-white">&#10094;</button>
         <button id="next-slide" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-white">&#10095;</button>
         <button id="exit-present" class="absolute top-4 right-4 px-4 py-2 bg-gray-800 rounded text-white">Exit</button>
